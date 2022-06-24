@@ -1,5 +1,5 @@
 
-package com.demo.firstproject.Model;
+package com.demo.firstproject.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

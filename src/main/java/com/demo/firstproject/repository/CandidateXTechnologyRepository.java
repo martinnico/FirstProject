@@ -1,6 +1,6 @@
-package com.demo.firstproject.Repositorys;
+package com.demo.firstproject.repository;
 
-import com.demo.firstproject.Model.CandidateXTechnologyModel;
+import com.demo.firstproject.models.CandidateXTechnologyModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

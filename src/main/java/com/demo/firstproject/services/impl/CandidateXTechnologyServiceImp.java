@@ -1,8 +1,9 @@
-package com.demo.firstproject.Services;
+package com.demo.firstproject.services.impl;
 
-import com.demo.firstproject.Model.CandidateXTechnologyModel;
-import com.demo.firstproject.Model.Dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.Repositorys.CandidateXTechnologyRepository;
+import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
+import com.demo.firstproject.repository.CandidateXTechnologyRepository;
+import com.demo.firstproject.services.CandidateXTechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CandidateXTechnologyService {
+public class CandidateXTechnologyServiceImp implements CandidateXTechnologyService {
     @Autowired
     private CandidateXTechnologyRepository candidateXTechnologyRepository;
 

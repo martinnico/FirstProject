@@ -1,4 +1,4 @@
-package com.demo.firstproject.Enums;
+package com.demo.firstproject.models.enums;
 
 public enum TypeOfDni {
     DNI,

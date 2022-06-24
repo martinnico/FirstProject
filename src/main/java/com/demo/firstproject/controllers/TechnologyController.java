@@ -1,7 +1,7 @@
-package com.demo.firstproject.Controller;
+package com.demo.firstproject.controllers;
 
-import com.demo.firstproject.Model.Dto.TechnologyDto;
-import com.demo.firstproject.Services.TechnologyService;
+import com.demo.firstproject.models.dto.TechnologyDto;
+import com.demo.firstproject.services.impl.TechnologyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.demo.firstproject.Model.TechnologyModel;
+import com.demo.firstproject.models.TechnologyModel;
 import java.util.List;
 
 @RestController
@@ -21,7 +21,7 @@ import java.util.List;
 public class TechnologyController {
 
     @Autowired
-    private TechnologyService service;
+    private TechnologyServiceImp service;
 
     @GetMapping
     public ResponseEntity <List<TechnologyModel>> getTechnology(){

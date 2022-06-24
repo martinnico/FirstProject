@@ -1,6 +1,6 @@
-package com.demo.firstproject.Repositorys;
+package com.demo.firstproject.repository;
 
-import com.demo.firstproject.Model.TechnologyModel;
+import com.demo.firstproject.models.TechnologyModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

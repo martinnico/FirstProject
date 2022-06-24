@@ -1,9 +1,9 @@
 
-package com.demo.firstproject.Model;
+package com.demo.firstproject.models;
 
 import java.util.*;
 
-import com.demo.firstproject.Enums.TypeOfDni;
+import com.demo.firstproject.models.enums.TypeOfDni;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;

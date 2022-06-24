@@ -1,5 +1,4 @@
-package com.demo.firstproject.Model.Dto;
-
+package com.demo.firstproject.models.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class CandidateDto {
+public class CandidateXTEchnologyDto {
     private String name;
-    private String lastName;
+    private String nameTechnology;
+    private String experience;
+
 }

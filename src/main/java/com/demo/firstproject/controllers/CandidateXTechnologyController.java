@@ -1,8 +1,8 @@
-package com.demo.firstproject.Controller;
+package com.demo.firstproject.controllers;
 
-import com.demo.firstproject.Model.CandidateXTechnologyModel;
-import com.demo.firstproject.Model.Dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.Services.CandidateXTechnologyService;
+import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
+import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.List;
 public class CandidateXTechnologyController {
 
         @Autowired
-        private CandidateXTechnologyService service;
+        private CandidateXTechnologyServiceImp service;
 
         @GetMapping
         public ResponseEntity <List<CandidateXTechnologyModel>> getCandidateXTechnology(){

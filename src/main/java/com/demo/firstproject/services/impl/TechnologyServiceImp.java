@@ -1,20 +1,21 @@
 
-package com.demo.firstproject.Services;
+package com.demo.firstproject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.demo.firstproject.Model.Dto.TechnologyDto;
-import com.demo.firstproject.Repositorys.TechnologyRepository;
+import com.demo.firstproject.models.dto.TechnologyDto;
+import com.demo.firstproject.repository.TechnologyRepository;
+import com.demo.firstproject.services.TechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import com.demo.firstproject.Model.TechnologyModel;
+import com.demo.firstproject.models.TechnologyModel;
 
 
 @Service
-public class TechnologyService {
+public class TechnologyServiceImp implements TechnologyService {
 
     @Autowired
     private TechnologyRepository repository;
