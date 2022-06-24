@@ -1,6 +1,7 @@
 package com.demo.firstproject.repository;
 
 import com.demo.firstproject.models.CandidateModel;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

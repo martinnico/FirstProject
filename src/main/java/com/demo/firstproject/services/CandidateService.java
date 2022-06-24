@@ -1,5 +1,4 @@
 package com.demo.firstproject.services;
-
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.dto.CandidateDto;
 

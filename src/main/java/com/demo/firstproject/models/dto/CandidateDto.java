@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class CandidateDto {
+    private Long id;
     private String name;
     private String lastName;
     private TypeOfDni typeDni;

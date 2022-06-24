@@ -20,7 +20,7 @@ public class CandidateServiceImp implements CandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public List<CandidateModel> getCandidate() {
+    public List<CandidateModel>getCandidate() {
         return  candidateRepository.findAll();
     }
 

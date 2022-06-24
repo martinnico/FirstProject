@@ -17,13 +17,13 @@ class CandidateControllerTest extends AbstractMVCTest {
 
 
     @Test
-    void getCandidateTest () throws Exception {
+    void getCandidateXTechnologyTest () throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/candidate"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void createCandidateTest () throws Exception {
+    void createCandidateXTechnologyTest () throws Exception {
 
         candidateService.createCandidate(createCandidateDto());
         verify(candidateService, times(1)).createCandidate(createCandidateDto());
@@ -35,7 +35,7 @@ class CandidateControllerTest extends AbstractMVCTest {
     }
 
     @Test
-    void updateCandidateTest () throws Exception {
+    void updateCandidateXTechnologyTest () throws Exception {
 
         candidateService.updateCandidate(1L,createCandidateDto());
         verify(candidateService,times(1)).updateCandidate(1L,createCandidateDto());
@@ -48,7 +48,7 @@ class CandidateControllerTest extends AbstractMVCTest {
     }
 
     @Test
-    void deleteCandidateTest () throws Exception {
+    void deleteCandidateXTechnologyTest () throws Exception {
 
         candidateService.deleteCandidate(1L);
         verify(candidateService,times(1)).deleteCandidate(1L);
@@ -58,7 +58,7 @@ class CandidateControllerTest extends AbstractMVCTest {
     }
 
     @Test
-    void findCandidateIdTest () throws Exception {
+    void findCandidateXTechnologyDto () throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/candidate/1"))
                 .andExpect((status().isOk()));
