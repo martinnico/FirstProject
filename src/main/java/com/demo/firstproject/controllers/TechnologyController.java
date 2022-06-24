@@ -1,7 +1,7 @@
 package com.demo.firstproject.controllers;
 
 import com.demo.firstproject.models.dto.TechnologyDto;
-import com.demo.firstproject.services.impl.TechnologyServiceImp;
+import com.demo.firstproject.services.TechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.List;
 public class TechnologyController {
 
     @Autowired
-    private TechnologyServiceImp service;
+    private TechnologyService service;
 
     @GetMapping
     public ResponseEntity <List<TechnologyModel>> getTechnology(){

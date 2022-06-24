@@ -1,8 +1,7 @@
 package com.demo.firstproject.repository;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.projections.Listcandidates;
+import com.demo.firstproject.projections.ListCandidates;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,5 +17,5 @@ public interface CandidateXTechnologyRepository extends JpaRepository<CandidateX
     CandidateXTechnologyModel findByCandidateId(Long id);
 
     @Query (value = GET_LIST_CANDIDATES_X_TECHNOLOGY ,nativeQuery = true)
-    List<Listcandidates> listCandidatesXTechnology(String technology);
+    List<ListCandidates> listCandidatesXTechnology(String technology);
 }

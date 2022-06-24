@@ -2,7 +2,7 @@ package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.projections.Listcandidates;
+import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
                 .build();
     }
 
-    public List<Listcandidates> listCandidatesXTechnologies(String technology){
+    public List<ListCandidates> listCandidatesXTechnologies(String technology){
          return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
     }
 }

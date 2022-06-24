@@ -2,7 +2,7 @@ package com.demo.firstproject.controllers;
 
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.dto.CandidateDto;
-import com.demo.firstproject.services.impl.CandidateServiceImp;
+import com.demo.firstproject.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import java.util.List;
 public class CandidateController {
 
     @Autowired
-    private CandidateServiceImp service;
+    private CandidateService service;
 
     @GetMapping
     public ResponseEntity<List<CandidateModel>> getCandidate() {
@@ -50,7 +50,6 @@ public class CandidateController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CandidateDto> findCandidateDtoById(@PathVariable("id") Long id) {
-        deleteCandidate(id);
         return new ResponseEntity<>(service.findCandidateDto(id), HttpStatus.OK);
     }
 
