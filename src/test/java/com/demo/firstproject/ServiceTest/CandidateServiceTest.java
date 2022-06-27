@@ -1,5 +1,6 @@
 package com.demo.firstproject.ServiceTest;
 
+import com.demo.firstproject.exception.CandidateNotFound;
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.impl.CandidateServiceImp;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CandidateServiceTest extends AbstractMVCService {
 
 
@@ -55,6 +57,13 @@ public class CandidateServiceTest extends AbstractMVCService {
     }
 
 
+    @Test
+    void updateCandidateTestFile (){
+
+        assertThrows(CandidateNotFound.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
+
+    }
+
 
     @Test
     void deleteCandidateTest (){
@@ -68,6 +77,12 @@ public class CandidateServiceTest extends AbstractMVCService {
         candidateServiceImp.deleteCandidate(createCandidateModel().getId());
 
         assertTrue(!createCandidateModel().isActive());
+    }
+
+    @Test
+    void deleteCandidateTestFail (){
+
+        assertThrows(CandidateNotFound.class, () -> candidateServiceImp.deleteCandidate(2L));
     }
 
     @Test
