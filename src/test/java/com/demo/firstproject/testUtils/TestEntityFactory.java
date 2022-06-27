@@ -56,7 +56,7 @@ public class TestEntityFactory {
     public static TechnologyModel createTechnologyModel (){
         TechnologyModel technologyModel = TechnologyModel
                 .builder()
-                .nameTechnology("java")
+                .nameTechnology("JAVA")
                 .version("8")
                 .build();
         return technologyModel;

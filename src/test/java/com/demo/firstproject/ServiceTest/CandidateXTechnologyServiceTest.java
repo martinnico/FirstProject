@@ -1,6 +1,5 @@
 package com.demo.firstproject.ServiceTest;
 
-import com.demo.firstproject.exception.CandidateNotFound;
 import com.demo.firstproject.exception.CandidateXTechnologyNotFound;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;

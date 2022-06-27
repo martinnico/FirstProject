@@ -1,32 +1,28 @@
 package com.demo.firstproject.ServiceTest;
 
-import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.exception.TechnologyNotFound;
 import com.demo.firstproject.models.TechnologyModel;
-import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.repository.TechnologyRepository;
-import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import com.demo.firstproject.services.impl.TechnologyServiceImp;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateDto;
-import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTEchnologyModel;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createTechnologyDto;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createTechnologyModel;
 import static com.demo.firstproject.testUtils.TestEntityFactory.technologyModelList;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TechnologyServiceTest {
+public class TechnologyServiceTest extends AbstractMVCService{
 
     @InjectMocks
     TechnologyServiceImp technologyServiceImp;
@@ -59,8 +55,42 @@ public class TechnologyServiceTest {
         void updateTechnologyTest() {
 
             when(technologyRepository.findById(1L)).thenReturn(Optional.of(createTechnologyModel()));
+            technologyServiceImp.updateTechnology(1L,createTechnologyDto());
+            verify(technologyRepository,times(1)).findById(1L);
+        }
+
+        @Test
+        void updateTechnologyTestFail (){
+            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFound.class);
+            assertThrows(TechnologyNotFound.class, () -> technologyServiceImp.updateTechnology(2L, createTechnologyDto()));
+        }
+    }
+
+    @Nested
+    class deleteTechnologyTest {
+
+        @Test
+        void deleteTechnologyTest (){
+
+            when(technologyRepository.findById(1L)).thenReturn(Optional.of(createTechnologyModel()));
+            technologyRepository.delete(createTechnologyModel());
+            verify(technologyRepository,times(1)).delete(createTechnologyModel());
+            technologyServiceImp.deleteTechnology(1L);
 
         }
+
+        @Test
+        void deleteTechnologyTestFail (){
+            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFound.class);
+            assertThrows(TechnologyNotFound.class, () -> technologyServiceImp.deleteTechnology(2L));
+        }
+    }
+
+    @Test
+    void findTechnologyDtoTest () {
+
+        when(technologyRepository.getById(1L)).thenReturn(createTechnologyModel());
+        technologyServiceImp.findTechnologyDto(1L);
 
     }
 }
