@@ -10,22 +10,43 @@ public interface ListCandidates {
     @Value("#{target.name}")
     String getNameCandidate();
 
+    @Value("#{target.name}")
+    void setNameCandidate( String nameCandidate);
+
     @Value("#{target.last_name}")
     String getLastNameCandidate();
+
+    @Value("#{target.last_name}")
+    void  setLastNameCandidate(String lastNameCandidate);
 
     @Value("#{target.document_number}")
     Long getDocumentNumberCandidate();
 
+    @Value("#{target.document_number}")
+    void setDocumentNumberCandidate(Long documentNumberCandidate);
+
     @Value("#{target.date_of_birth}")
     Date getDateOfBirthCandidate();
+
+    @Value("#{target.date_of_birth}")
+    void setDateOfBirthCandidate(Date birthOfCandidate);
 
     @Value("#{target.type_dni}")
     TypeOfDni getTypeOfDniCandidate();
 
+    @Value("#{target.type_dni}")
+    void setTypeOfDniCandidate(TypeOfDni typeOfDniCandidate);
+
     @Value("#{target.experience}")
-    String experienceCandidate();
+    String getExperienceCandidate();
+
+    @Value("#{target.experience}")
+    void setExperienceCandidate(String experienceCandidate);
 
     @Value("#{target.name_technology}")
-    String nameOfTechnology();
+    String getNameOfTechnology();
+
+    @Value("#{target.name_technology}")
+    void setNameOfTechnology(String nameOfTechnology);
 
 }

@@ -2,6 +2,7 @@ package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
 import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
@@ -22,15 +23,24 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
         return  candidateXTechnologyRepository.findAll();
     }
 
-    public CandidateXTechnologyModel createCandidateXTechnology(CandidateXTechnologyModel candidateXTechnology)
+    public CandidateXTechnologyModel createCandidateXTechnology(CandidateXTechnologyDtoSend candidateXTechnologyDtoSend)
     {
-            return candidateXTechnologyRepository.save(candidateXTechnology);
+        CandidateXTechnologyModel candidateXTechnologyModel = CandidateXTechnologyModel
+                .builder()
+                .candidate(candidateXTechnologyDtoSend.getCandidate())
+                .technologyModel(candidateXTechnologyDtoSend.getTechnology())
+                .experience(candidateXTechnologyDtoSend.getExperience())
+                .build();
+            return candidateXTechnologyRepository.save(candidateXTechnologyModel);
     }
 
-    public CandidateXTechnologyModel updateCandidateXTechnology(Long id, CandidateXTechnologyModel candidateXTechnology){
+    public CandidateXTechnologyModel updateCandidateXTechnology(Long id, CandidateXTechnologyDtoSend candidateXTechnologyDtoSend){
         Optional<CandidateXTechnologyModel> result = candidateXTechnologyRepository.findById(id);
         if(result.isPresent()){
-            return candidateXTechnologyRepository.save(candidateXTechnology);
+            result.get().setCandidate(candidateXTechnologyDtoSend.getCandidate());
+            result.get().setTechnologyModel(candidateXTechnologyDtoSend.getTechnology());
+            result.get().setExperience(candidateXTechnologyDtoSend.getExperience());
+            return candidateXTechnologyRepository.save(result.get());
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " + id + "No existe"));

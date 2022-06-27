@@ -2,6 +2,7 @@ package com.demo.firstproject.controllers;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
 import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,13 @@ public class CandidateXTechnologyController {
 
         }
         @PostMapping
-        public ResponseEntity<CandidateXTechnologyModel> createCandidateXTechnology(@RequestBody CandidateXTechnologyModel candidateXTechnology) {
-            return new ResponseEntity<>(service.createCandidateXTechnology(candidateXTechnology),HttpStatus.CREATED);
+        public ResponseEntity<CandidateXTechnologyModel> createCandidateXTechnology(@RequestBody CandidateXTechnologyDtoSend candidateXTechnologyDtoSend) {
+            return new ResponseEntity<>(service.createCandidateXTechnology(candidateXTechnologyDtoSend),HttpStatus.CREATED);
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<CandidateXTechnologyModel> updateCandidateXTechnology(@PathVariable ("id") Long id,@RequestBody CandidateXTechnologyModel candidateXTechnology) {
-            return new ResponseEntity<>(service.updateCandidateXTechnology(id,candidateXTechnology),HttpStatus.OK);
+        public ResponseEntity<CandidateXTechnologyModel> updateCandidateXTechnology(@PathVariable ("id") Long id,@RequestBody CandidateXTechnologyDtoSend candidateXTechnologyDtoSend) {
+            return new ResponseEntity<>(service.updateCandidateXTechnology(id,candidateXTechnologyDtoSend),HttpStatus.OK);
         }
 
         @DeleteMapping("/{id}")

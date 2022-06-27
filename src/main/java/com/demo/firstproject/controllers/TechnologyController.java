@@ -29,19 +29,19 @@ public class TechnologyController {
 
     }
     @PostMapping
-    public ResponseEntity<TechnologyModel> createTechnology(@RequestBody TechnologyModel technology) {
-        return new ResponseEntity<>(service.createTechnology(technology),HttpStatus.CREATED);
+    public ResponseEntity<TechnologyModel> createTechnology(@RequestBody TechnologyDto technologyDto) {
+        return new ResponseEntity<>(service.createTechnology(technologyDto),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TechnologyModel> updateTechnology(@PathVariable ("id") Long id,@RequestBody TechnologyModel technology) {
-        return new ResponseEntity<>(service.updateTechnology(id,technology),HttpStatus.OK);
+    public ResponseEntity<TechnologyModel> updateTechnology(@PathVariable ("id") Long id,@RequestBody TechnologyDto technologyDto) {
+        return new ResponseEntity<>(service.updateTechnology(id,technologyDto),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTechnology(@PathVariable ("id") Long id) {
         service.deleteTechnology(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")

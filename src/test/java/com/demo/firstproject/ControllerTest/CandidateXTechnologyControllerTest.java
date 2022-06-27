@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateDto;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTEchnologyModel;
+import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTechnologyDtoSend;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,8 +29,8 @@ class CandidateXTechnologyControllerTest extends AbstractMVCTest{
     @Test
     void createCandidateXTechnologyTest () throws Exception {
 
-        candidateXTechnologyService.createCandidateXTechnology(createCandidateXTEchnologyModel());
-        verify(candidateXTechnologyService, times(1)).createCandidateXTechnology(createCandidateXTEchnologyModel());
+        candidateXTechnologyService.createCandidateXTechnology(createCandidateXTechnologyDtoSend());
+        verify(candidateXTechnologyService, times(1)).createCandidateXTechnology(createCandidateXTechnologyDtoSend());
         String newCandidateXTechnology = new Gson().toJson(createCandidateXTEchnologyModel());
         mockMvc.perform(MockMvcRequestBuilders.post("/candidateXTechnology")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -40,8 +41,8 @@ class CandidateXTechnologyControllerTest extends AbstractMVCTest{
     @Test
     void updateCandidateXTechnologyTest () throws Exception {
 
-        candidateXTechnologyService.updateCandidateXTechnology(1L,createCandidateXTEchnologyModel());
-        verify(candidateXTechnologyService,times(1)).updateCandidateXTechnology(1L,createCandidateXTEchnologyModel());
+        candidateXTechnologyService.updateCandidateXTechnology(1L,createCandidateXTechnologyDtoSend());
+        verify(candidateXTechnologyService,times(1)).updateCandidateXTechnology(1L,createCandidateXTechnologyDtoSend());
         String newCandidateXTechnology = new Gson().toJson(createCandidateDto());
         mockMvc.perform(MockMvcRequestBuilders.put("/candidateXTechnology/1")
                         .contentType(MediaType.APPLICATION_JSON)

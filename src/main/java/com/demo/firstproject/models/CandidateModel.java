@@ -32,7 +32,9 @@ public class CandidateModel {
     
     @NotEmpty(message = "completar numero de DNI")
     private long documentNumber;
-    
+
+    private boolean active ;
+
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 

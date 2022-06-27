@@ -3,7 +3,6 @@ package com.demo.firstproject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.demo.firstproject.models.dto.TechnologyDto;
 import com.demo.firstproject.repository.TechnologyRepository;
 import com.demo.firstproject.services.TechnologyService;
@@ -19,21 +18,26 @@ public class TechnologyServiceImp implements TechnologyService {
 
     @Autowired
     private TechnologyRepository repository;
-    @Autowired
-    private TechnologyRepository technologyRepository;
+
 
     public List<TechnologyModel> getTechnology() {
         return  repository.findAll();
     }
 
-    public TechnologyModel createTechnology(TechnologyModel technology){
-        return repository.save(technology);
+    public TechnologyModel createTechnology(TechnologyDto technologyDto)
+    {
+        return repository.save(TechnologyModel.builder()
+                        .nameTechnology(technologyDto.getNameTechnology())
+                        .version(technologyDto.getVersion())
+                        .build());
     }
 
-    public TechnologyModel updateTechnology(Long id, TechnologyModel technology){
+    public TechnologyModel updateTechnology(Long id, TechnologyDto technologyDto){
         Optional<TechnologyModel> result = repository.findById(id);
         if(result.isPresent()){
-            return repository.save(technology);
+            result.get().setNameTechnology(technologyDto.getNameTechnology());
+            result.get().setVersion(technologyDto.getVersion());
+            return repository.save(result.get());
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " + id + " no existe"));
@@ -53,7 +57,7 @@ public class TechnologyServiceImp implements TechnologyService {
 
 
     public TechnologyDto findTechnologyDto (Long id){
-        TechnologyModel technologyModel = technologyRepository.getById(id);
+        TechnologyModel technologyModel = repository.getById(id);
         return  TechnologyDto.builder()
                 .nameTechnology(technologyModel.getNameTechnology())
                 .version(technologyModel.getVersion())

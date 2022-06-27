@@ -6,13 +6,13 @@ import com.demo.firstproject.services.impl.CandidateServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateDto;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateModel;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +39,7 @@ public class CandidateServiceTest extends AbstractMVCService {
 
     @Test
     void createCandidateTest (){
-        when(candidateRepository.save(createCandidateModel())).thenReturn(createCandidateModel());
+        candidateRepository.save(createCandidateModel());
         candidateServiceImp.createCandidate(createCandidateDto());
         verify(candidateRepository,times(1)).save(createCandidateModel());
 
@@ -48,15 +48,34 @@ public class CandidateServiceTest extends AbstractMVCService {
     @Test
     void updateCandidateTest (){
 
-        when(candidateRepository.save(createCandidateModel())).thenReturn(createCandidateModel());
-        candidateServiceImp.updateCandidate(1L,createCandidateDto());
+        when(candidateRepository.findById(1L)).thenReturn(Optional.of(createCandidateModel()));
+        candidateRepository.save(createCandidateModel());
         verify(candidateRepository,times(1)).save((createCandidateModel()));
+        candidateServiceImp.updateCandidate(1L,createCandidateDto());
 
     }
 
 
     @Test
-    void deleteCandidate (){
+    void deleteCandidateTest (){
+
+
+        when(candidateRepository.findById(1L))
+                        .thenReturn(Optional.of(createCandidateModel()));
+        candidateRepository.delete(createCandidateModel());
+        verify(candidateRepository,times(1)).delete(createCandidateModel());
+
+        candidateServiceImp.deleteCandidate(createCandidateModel().getId());
+
+        assertTrue(!createCandidateModel().isActive());
+    }
+
+    @Test
+    void findCandidateDtoTest () {
+
+        when(candidateRepository.getById(1L)).thenReturn(createCandidateModel());
+        candidateServiceImp.findCandidateDto(1L);
+        verify(candidateRepository,times(1)).getById(1L);
 
     }
 

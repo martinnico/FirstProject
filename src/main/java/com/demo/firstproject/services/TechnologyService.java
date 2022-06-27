@@ -9,9 +9,9 @@ public interface TechnologyService {
 
      List<TechnologyModel> getTechnology();
 
-     TechnologyModel createTechnology(TechnologyModel technology);
+     TechnologyModel createTechnology(TechnologyDto technologyDto);
 
-     TechnologyModel updateTechnology(Long id, TechnologyModel technology);
+     TechnologyModel updateTechnology(Long id, TechnologyDto technologyDto);
 
      void deleteTechnology (Long id);
 

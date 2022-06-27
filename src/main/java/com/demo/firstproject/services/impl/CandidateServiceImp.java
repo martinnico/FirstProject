@@ -3,7 +3,6 @@ package com.demo.firstproject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.repository.CandidateRepository;
@@ -37,18 +36,15 @@ public class CandidateServiceImp implements CandidateService {
         candidateRepository.save(candidate);
     }
 
-    public void updateCandidate(Long id, CandidateDto candidate){
+    public void updateCandidate(Long id, CandidateDto candidateDto){
         Optional<CandidateModel> result = candidateRepository.findById(id);
         if(result.isPresent()){
-          CandidateModel candidateModel = CandidateModel
-                  .builder()
-                  .name(candidate.getName())
-                  .lastName(candidate.getLastName())
-                  .typeDni(candidate.getTypeDni())
-                  .documentNumber(candidate.getDocumentNumber())
-                  .dateOfBirth(candidate.getDateOfBirth())
-                  .build();
-         candidateRepository.save(candidateModel);
+            result.get().setName(candidateDto.getName());
+            result.get().setLastName(candidateDto.getLastName());
+            result.get().setTypeDni(candidateDto.getTypeDni());
+            result.get().setDocumentNumber(candidateDto.getDocumentNumber());
+            result.get().setDateOfBirth(candidateDto.getDateOfBirth());
+         candidateRepository.save(result.get());
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id "+id+" no existe"));
