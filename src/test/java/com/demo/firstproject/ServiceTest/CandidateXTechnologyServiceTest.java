@@ -1,8 +1,11 @@
 package com.demo.firstproject.ServiceTest;
 
+import com.demo.firstproject.exception.CandidateNotFound;
+import com.demo.firstproject.exception.CandidateXTechnologyNotFound;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,6 +19,7 @@ import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateX
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTechnologyModelList;
 import static com.demo.firstproject.testUtils.TestEntityFactory.getCandidateByTechnologyProjectionList;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -46,25 +50,47 @@ public class CandidateXTechnologyServiceTest extends AbstractMVCService {
 
     }
 
-    @Test
-    void updateCandidateXTechnologyTest () {
+    @Nested
+    class updateCandidateXTechnologyTest {
+        @Test
+        void updateCandidateXTechnologyTest () {
 
-        when(candidateXTechnologyRepository.findById(1L)).thenReturn(Optional.of(createCandidateXTEchnologyModel()));
-        when(candidateXTechnologyRepository.save(createCandidateXTEchnologyModel())).thenReturn(createCandidateXTEchnologyModel());
-        candidateXTechnologyServiceImp.updateCandidateXTechnology(1L, createCandidateXTechnologyDtoSend());
-        verify(candidateXTechnologyRepository,times(1)).findById(1L);
-        verify(candidateXTechnologyRepository,times(1)).save(createCandidateXTEchnologyModel());
+            when(candidateXTechnologyRepository.findById(1L)).thenReturn(Optional.of(createCandidateXTEchnologyModel()));
+            when(candidateXTechnologyRepository.save(createCandidateXTEchnologyModel())).thenReturn(createCandidateXTEchnologyModel());
+            candidateXTechnologyServiceImp.updateCandidateXTechnology(1L, createCandidateXTechnologyDtoSend());
+            verify(candidateXTechnologyRepository,times(1)).findById(1L);
+            verify(candidateXTechnologyRepository,times(1)).save(createCandidateXTEchnologyModel());
+        }
+
+        @Test
+        void updateCandidateXTechnologyTestFail () {
+            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFound.class);
+            assertThrows(CandidateXTechnologyNotFound.class, () -> candidateXTechnologyServiceImp.updateCandidateXTechnology(2L, createCandidateXTechnologyDtoSend()));
+        }
 
     }
 
-    @Test
-    void deleteCandidateXTechnology () {
+    @Nested
+    class deleteCandidateXTechnologyTest {
+        @Test
+        void deleteCandidateXTechnology () {
 
-        when(candidateXTechnologyRepository.findById(1L)).thenReturn(Optional.of(createCandidateXTEchnologyModel()));
-        candidateXTechnologyRepository.delete(createCandidateXTEchnologyModel());
-        verify(candidateXTechnologyRepository,times(1)).delete(createCandidateXTEchnologyModel());
-        candidateXTechnologyServiceImp.deleteCandidateXTechnology(1L);
+            when(candidateXTechnologyRepository.findById(1L)).thenReturn(Optional.of(createCandidateXTEchnologyModel()));
+            candidateXTechnologyRepository.delete(createCandidateXTEchnologyModel());
+            verify(candidateXTechnologyRepository,times(1)).delete(createCandidateXTEchnologyModel());
+            candidateXTechnologyServiceImp.deleteCandidateXTechnology(1L);
+        }
+
+        @Test
+        void deleteCandidateXTechnologyFail () {
+            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFound.class);
+            assertThrows(CandidateXTechnologyNotFound.class, () -> candidateXTechnologyServiceImp.deleteCandidateXTechnology(2L));
+
+        }
+
     }
+
+
 
     @Test
     void findCandidateXTechnologyDtoTest (){

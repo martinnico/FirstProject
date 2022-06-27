@@ -56,7 +56,6 @@ public class TestEntityFactory {
     public static TechnologyModel createTechnologyModel (){
         TechnologyModel technologyModel = TechnologyModel
                 .builder()
-                .idTechnology(1L)
                 .nameTechnology("java")
                 .version("8")
                 .build();
@@ -111,6 +110,11 @@ public class TestEntityFactory {
         return list;
     }
 
+    public static List<TechnologyModel> technologyModelList (){
+        List<TechnologyModel> list = new ArrayList<>();
+        list.add(createTechnologyModel());
+        return list;
+    }
     public static List<ListCandidates> getCandidateByTechnologyProjectionList() {
         List<ListCandidates> projectionList = new ArrayList<>();
         projectionList.add(getCandidateByTechnologyProjection());
