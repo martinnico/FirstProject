@@ -1,5 +1,6 @@
 package com.demo.firstproject.services.impl;
 
+import com.demo.firstproject.exception.CandidateXTechnologyNotFound;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
@@ -7,9 +8,7 @@ import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
             return candidateXTechnologyRepository.save(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " + id + "No existe"));
+            throw new CandidateXTechnologyNotFound("El id "+ id + "no existe");
         }
     }
 
@@ -55,8 +54,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
             candidateXTechnologyRepository.delete(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id" +" "+ id +" "+ "no existe" ));
-        }
+            throw new CandidateXTechnologyNotFound("El id "+ id + "no existe");        }
     }
 
 

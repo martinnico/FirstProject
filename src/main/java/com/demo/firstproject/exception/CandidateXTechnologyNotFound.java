@@ -1,4 +1,8 @@
 package com.demo.firstproject.exception;
 
-public class NotFound extends RuntimeException{
+public class CandidateXTechnologyNotFound extends RuntimeException{
+    public  CandidateXTechnologyNotFound(String message){
+        super (message);
+    }
+
 }

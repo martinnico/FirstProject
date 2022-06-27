@@ -3,14 +3,15 @@ package com.demo.firstproject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.demo.firstproject.exception.CandidateNotFound;
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 
 
 @Service
@@ -47,7 +48,7 @@ public class CandidateServiceImp implements CandidateService {
          candidateRepository.save(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id "+id+" no existe"));
+            throw new CandidateNotFound("El id" + id + "no existe");
         }
     }
 
@@ -58,7 +59,7 @@ public class CandidateServiceImp implements CandidateService {
             candidateRepository.delete(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " +id+" No existe"));
+            throw new CandidateNotFound("El id" + id + "no existe");
         }
     }
 

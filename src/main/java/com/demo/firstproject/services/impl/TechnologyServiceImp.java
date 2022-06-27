@@ -3,6 +3,8 @@ package com.demo.firstproject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.demo.firstproject.exception.TechnologyNotFound;
 import com.demo.firstproject.models.dto.TechnologyDto;
 import com.demo.firstproject.repository.TechnologyRepository;
 import com.demo.firstproject.services.TechnologyService;
@@ -40,7 +42,7 @@ public class TechnologyServiceImp implements TechnologyService {
             return repository.save(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " + id + " no existe"));
+            throw new TechnologyNotFound("El id :"+ id + " no existe");
         }
     }
 
@@ -50,7 +52,7 @@ public class TechnologyServiceImp implements TechnologyService {
             repository.delete(result.get());
         }
         else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("El id " + id + "no existe"));
+            throw new TechnologyNotFound("EL id: "+ id + " no existe");
         }
     }
 

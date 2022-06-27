@@ -1,30 +1,21 @@
 package com.demo.firstproject.ServiceTest;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
-import com.demo.firstproject.services.impl.CandidateServiceImp;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import com.demo.firstproject.models.CandidateModel;
-import com.demo.firstproject.repository.CandidateRepository;
-import com.demo.firstproject.services.impl.CandidateServiceImp;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateDto;
-import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateModel;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTEchnologyModel;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTechnologyDtoSend;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateXTechnologyModelList;
 import static com.demo.firstproject.testUtils.TestEntityFactory.getCandidateByTechnologyProjectionList;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

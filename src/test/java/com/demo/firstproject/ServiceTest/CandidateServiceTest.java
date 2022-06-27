@@ -52,8 +52,8 @@ public class CandidateServiceTest extends AbstractMVCService {
         candidateRepository.save(createCandidateModel());
         verify(candidateRepository,times(1)).save((createCandidateModel()));
         candidateServiceImp.updateCandidate(1L,createCandidateDto());
-
     }
+
 
 
     @Test
