@@ -7,7 +7,7 @@ import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.models.dto.TechnologyDto;
 import com.demo.firstproject.models.enums.TypeOfDni;
-import com.demo.firstproject.projections.ListCandidates;
+import com.demo.firstproject.projections.ListCandidatesProjection;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,14 +115,14 @@ public class TestEntityFactory {
         list.add(createTechnologyModel());
         return list;
     }
-    public static List<ListCandidates> getCandidateByTechnologyProjectionList() {
-        List<ListCandidates> projectionList = new ArrayList<>();
+    public static List<ListCandidatesProjection> getCandidateByTechnologyProjectionList() {
+        List<ListCandidatesProjection> projectionList = new ArrayList<>();
         projectionList.add(getCandidateByTechnologyProjection());
         return projectionList;
     }
 
-    public static ListCandidates getCandidateByTechnologyProjection() {
-        ListCandidates candidateByTechnologyProjection = new ListCandidates() {
+    public static ListCandidatesProjection getCandidateByTechnologyProjection() {
+        ListCandidatesProjection candidateByTechnologyProjection = new ListCandidatesProjection() {
 
             @Override
             public  void setNameCandidate(String nameCandidate) {

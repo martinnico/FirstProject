@@ -2,7 +2,7 @@ package com.demo.firstproject.controllers;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
-import com.demo.firstproject.projections.ListCandidates;
+import com.demo.firstproject.projections.ListCandidatesProjection;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,7 +54,7 @@ public class CandidateXTechnologyController {
     }
 
         @GetMapping(value = "/listcandidate")
-        public ResponseEntity<List<ListCandidates>> listCandidateXTechnology(@PathVariable String technology){
+        public ResponseEntity<List<ListCandidatesProjection>> listCandidateXTechnology(@PathVariable String technology){
             return new ResponseEntity<>(service.listCandidatesXTechnologies(technology),HttpStatus.OK);
         }
 

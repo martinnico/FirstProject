@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 
-public interface ListCandidates {
+public interface ListCandidatesProjection {
 
     @Value("#{target.name}")
     String getNameCandidate();

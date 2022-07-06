@@ -3,7 +3,7 @@ package com.demo.firstproject.services.impl;
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
-import com.demo.firstproject.projections.ListCandidates;
+import com.demo.firstproject.projections.ListCandidatesProjection;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +78,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
                     .build();
         }
 
-    public List<ListCandidates> listCandidatesXTechnologies(String technology) {
+    public List<ListCandidatesProjection> listCandidatesXTechnologies(String technology) {
         return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
     }
 }
