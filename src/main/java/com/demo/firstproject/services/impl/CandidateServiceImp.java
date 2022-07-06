@@ -37,6 +37,7 @@ public class CandidateServiceImp implements CandidateService {
                 .dateOfBirth(candidateDto.getDateOfBirth())
                 .build();
         candidateRepository.save(candidate);
+        log.debug("Se creo un nuevo candidato: "+ candidate);
     }
 
     @Override
