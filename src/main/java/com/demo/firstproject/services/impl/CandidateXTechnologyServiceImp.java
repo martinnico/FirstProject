@@ -1,74 +1,84 @@
 package com.demo.firstproject.services.impl;
 
-import com.demo.firstproject.exception.CandidateXTechnologyNotFound;
+import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
+import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class CandidateXTechnologyServiceImp implements CandidateXTechnologyService {
     @Autowired
     private CandidateXTechnologyRepository candidateXTechnologyRepository;
 
-    public List<CandidateXTechnologyModel> getCandidateXTechnology()
-    {
-        return  candidateXTechnologyRepository.findAll();
+    public List<CandidateXTechnologyModel> getCandidateXTechnology() {
+        return candidateXTechnologyRepository.findAll();
     }
 
-    public CandidateXTechnologyModel createCandidateXTechnology(CandidateXTechnologyDtoSend candidateXTechnologyDtoSend)
-    {
+    @Override
+    public void createCandidateXTechnology(CandidateXTechnologyDto candidateXTechnologySendDto) {
         CandidateXTechnologyModel candidateXTechnologyModel = CandidateXTechnologyModel
                 .builder()
-                .candidate(candidateXTechnologyDtoSend.getCandidate())
-                .technologyModel(candidateXTechnologyDtoSend.getTechnology())
-                .experience(candidateXTechnologyDtoSend.getExperience())
+                .candidate(candidateXTechnologySendDto.getCandidate())
+                .technology(candidateXTechnologySendDto.getTechnology())
+                .experience(candidateXTechnologySendDto.getExperience())
                 .build();
-            return candidateXTechnologyRepository.save(candidateXTechnologyModel);
+        candidateXTechnologyRepository.save(candidateXTechnologyModel);
+        log.debug("Se agrego el objeto: " + candidateXTechnologyModel);
     }
 
-    public CandidateXTechnologyModel updateCandidateXTechnology(Long id, CandidateXTechnologyDtoSend candidateXTechnologyDtoSend){
+    @Override
+    public void updateCandidateXTechnology(Long id, CandidateXTechnologyDto candidateXTechnologySendDto) {
+        CandidateXTechnologyModel result = candidateXTechnologyRepository.findById(id).orElseThrow(() -> new CandidateXTechnologyNotFoundException("Objeto no encontrado "));
+        try {
+            if (result != null) {
+                result = CandidateXTechnologyModel.builder()
+                        .candidate(candidateXTechnologySendDto.getCandidate())
+                        .technology(candidateXTechnologySendDto.getTechnology())
+                        .experience(candidateXTechnologySendDto.getExperience())
+                        .build();
+                candidateXTechnologyRepository.save(result);
+            }
+        } catch (CandidateXTechnologyNotFoundException c) {
+            log.error("El objeto con ID: " + id + " no se ha encontrado");
+        }
+    }
+
+    @Override
+    public void deleteCandidateXTechnology(Long id) {
+
+
         Optional<CandidateXTechnologyModel> result = candidateXTechnologyRepository.findById(id);
-        if(result.isPresent()){
-            result.get().setCandidate(candidateXTechnologyDtoSend.getCandidate());
-            result.get().setTechnologyModel(candidateXTechnologyDtoSend.getTechnology());
-            result.get().setExperience(candidateXTechnologyDtoSend.getExperience());
-            return candidateXTechnologyRepository.save(result.get());
-        }
-        else {
-            throw new CandidateXTechnologyNotFound("El id "+ id + "no existe");
+        try {
+            if (result.isPresent()) {
+                candidateXTechnologyRepository.delete(result.get());
+            }
+        } catch (CandidateXTechnologyNotFoundException c) {
+            log.error("El objeto con ID: " + id + " no se ha encontrado");
         }
     }
 
-    public void deleteCandidateXTechnology (Long id){
 
-
-        Optional<CandidateXTechnologyModel> result = candidateXTechnologyRepository.findById(id);
-        if(result.isPresent()){
-            candidateXTechnologyRepository.delete(result.get());
-        }
-        else {
-            throw new CandidateXTechnologyNotFound("El id "+ id + "no existe");        }
-    }
-
-
-
-    public CandidateXTEchnologyDto findCandidateXTechnologyDto(Long candidateId){
+    @Override
+    public CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId) {
         CandidateXTechnologyModel candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
-        return CandidateXTEchnologyDto.builder()
-                .name(candidateXTechnology.getCandidate().getName())
-                .nameTechnology(candidateXTechnology.getTechnologyModel().getNameTechnology())
-                .experience(candidateXTechnology.getExperience())
-                .build();
-    }
+            return CandidateXTechnologyDto.builder()
+                    .candidate(candidateXTechnology.getCandidate())
+                    .technology(candidateXTechnology.getTechnology())
+                    .experience(candidateXTechnology.getExperience())
+                    .build();
+        }
 
-    public List<ListCandidates> listCandidatesXTechnologies(String technology){
-         return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
+    public List<ListCandidates> listCandidatesXTechnologies(String technology) {
+        return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
     }
 }
