@@ -4,17 +4,19 @@ package com.demo.firstproject.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.demo.firstproject.exception.CandidateNotFound;
+import com.demo.firstproject.exception.CandidateNotFoundException;
 import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.CandidateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 
 @Service
+@Slf4j
 public class CandidateServiceImp implements CandidateService {
 
     @Autowired
@@ -24,7 +26,7 @@ public class CandidateServiceImp implements CandidateService {
         return  candidateRepository.findAll();
     }
 
-
+    @Override
     public void createCandidate(CandidateDto candidateDto){
         CandidateModel candidate = CandidateModel
                 .builder()
@@ -37,33 +39,38 @@ public class CandidateServiceImp implements CandidateService {
         candidateRepository.save(candidate);
     }
 
+    @Override
     public void updateCandidate(Long id, CandidateDto candidateDto){
-        Optional<CandidateModel> result = candidateRepository.findById(id);
-        if(result.isPresent()){
-            result.get().setName(candidateDto.getName());
-            result.get().setLastName(candidateDto.getLastName());
-            result.get().setTypeDni(candidateDto.getTypeDni());
-            result.get().setDocumentNumber(candidateDto.getDocumentNumber());
-            result.get().setDateOfBirth(candidateDto.getDateOfBirth());
-         candidateRepository.save(result.get());
-        }
-        else {
-            throw new CandidateNotFound("El id" + id + "no existe");
-        }
+        CandidateModel result = candidateRepository.findById(id).orElseThrow(()->new CandidateNotFoundException("Candidato no encontrado "));
+        try {
+        if( result!= null ){
+              result = CandidateModel.builder()
+                      .name(candidateDto.getName())
+                      .lastName(candidateDto.getLastName())
+                      .typeDni(candidateDto.getTypeDni())
+                      .documentNumber(candidateDto.getDocumentNumber())
+                      .dateOfBirth(candidateDto.getDateOfBirth())
+                      .build();
+              candidateRepository.save(result);
+          } }catch (CandidateNotFoundException c){
+                log.error("El candidato con ID: "+id+" no se ha encontrado");
+          }
     }
-
+    @Override
     public void deleteCandidate (Long id){
 
         Optional<CandidateModel> result = candidateRepository.findById(id);
-        if(result.isPresent()){
-            candidateRepository.delete(result.get());
+        try{
+            result.isPresent();
+                candidateRepository.delete(result.get());
+            }catch(CandidateNotFoundException e){
+                log.error("El Candidato con id: " + id + "no se ha encontrado");
+
+            }
         }
-        else {
-            throw new CandidateNotFound("El id" + id + "no existe");
-        }
-    }
 
 
+    @Override
     public CandidateDto findCandidateDto (Long id){
         CandidateModel candidateModel = candidateRepository.getById(id);
         return  CandidateDto.builder()
