@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CandidateXTechnologyDtoSend {
+public class CandidateXTechnologySendDto {
     private Long id;
     private CandidateModel candidate;
     private TechnologyModel technology;
