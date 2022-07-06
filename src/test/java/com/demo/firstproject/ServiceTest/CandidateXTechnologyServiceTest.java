@@ -1,6 +1,6 @@
 package com.demo.firstproject.ServiceTest;
 
-import com.demo.firstproject.exception.CandidateXTechnologyNotFound;
+import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
@@ -63,8 +63,8 @@ public class CandidateXTechnologyServiceTest extends AbstractMVCService {
 
         @Test
         void updateCandidateXTechnologyTestFail () {
-            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFound.class);
-            assertThrows(CandidateXTechnologyNotFound.class, () -> candidateXTechnologyServiceImp.updateCandidateXTechnology(2L, createCandidateXTechnologyDtoSend()));
+            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFoundException.class);
+            assertThrows(CandidateXTechnologyNotFoundException.class, () -> candidateXTechnologyServiceImp.updateCandidateXTechnology(2L, createCandidateXTechnologyDtoSend()));
         }
 
     }
@@ -82,8 +82,8 @@ public class CandidateXTechnologyServiceTest extends AbstractMVCService {
 
         @Test
         void deleteCandidateXTechnologyFail () {
-            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFound.class);
-            assertThrows(CandidateXTechnologyNotFound.class, () -> candidateXTechnologyServiceImp.deleteCandidateXTechnology(2L));
+            when(candidateXTechnologyRepository.findById(2L)).thenThrow(CandidateXTechnologyNotFoundException.class);
+            assertThrows(CandidateXTechnologyNotFoundException.class, () -> candidateXTechnologyServiceImp.deleteCandidateXTechnology(2L));
 
         }
 

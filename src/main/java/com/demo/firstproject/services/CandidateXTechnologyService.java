@@ -1,8 +1,7 @@
 package com.demo.firstproject.services;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 
 import java.util.List;
 
@@ -10,11 +9,11 @@ public interface CandidateXTechnologyService {
 
      List<CandidateXTechnologyModel> getCandidateXTechnology();
 
-     CandidateXTechnologyModel createCandidateXTechnology(CandidateXTechnologyDtoSend candidateXTechnologyDtoSend);
+     void createCandidateXTechnology(CandidateXTechnologyDto candidateXTechnologyDtoSend);
 
-     CandidateXTechnologyModel updateCandidateXTechnology(Long id, CandidateXTechnologyDtoSend candidateXTechnologyDtoSend);
+     void updateCandidateXTechnology(Long id, CandidateXTechnologyDto candidateXTechnologyDtoSend);
 
      void deleteCandidateXTechnology (Long id);
 
-     CandidateXTEchnologyDto findCandidateXTechnologyDto(Long candidateId);
+     CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId);
 }

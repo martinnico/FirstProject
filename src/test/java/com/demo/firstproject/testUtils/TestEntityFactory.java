@@ -4,7 +4,7 @@ import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.TechnologyModel;
 import com.demo.firstproject.models.dto.CandidateDto;
-import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.models.dto.TechnologyDto;
 import com.demo.firstproject.models.enums.TypeOfDni;
 import com.demo.firstproject.projections.ListCandidates;
@@ -29,8 +29,8 @@ public class TestEntityFactory {
 
     }
 
-    public static CandidateXTechnologyDtoSend createCandidateXTechnologyDtoSend (){
-        CandidateXTechnologyDtoSend candidateXTechnologyDtoSend = CandidateXTechnologyDtoSend
+    public static CandidateXTechnologyDto createCandidateXTechnologyDtoSend (){
+        CandidateXTechnologyDto candidateXTechnologyDtoSend = CandidateXTechnologyDto
                 .builder()
                 .candidate(createCandidateModel())
                 .technology(createTechnologyModel())

@@ -1,7 +1,6 @@
 package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
-import com.demo.firstproject.models.CandidateModel;
 import com.demo.firstproject.models.CandidateXTechnologyModel;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidates;
@@ -29,7 +28,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
         CandidateXTechnologyModel candidateXTechnologyModel = CandidateXTechnologyModel
                 .builder()
                 .candidate(candidateXTechnologySendDto.getCandidate())
-                .technology(candidateXTechnologySendDto.getTechnology())
+                .technologyModel(candidateXTechnologySendDto.getTechnology())
                 .experience(candidateXTechnologySendDto.getExperience())
                 .build();
         candidateXTechnologyRepository.save(candidateXTechnologyModel);
@@ -43,7 +42,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
             if (result != null) {
                 result = CandidateXTechnologyModel.builder()
                         .candidate(candidateXTechnologySendDto.getCandidate())
-                        .technology(candidateXTechnologySendDto.getTechnology())
+                        .technologyModel(candidateXTechnologySendDto.getTechnology())
                         .experience(candidateXTechnologySendDto.getExperience())
                         .build();
                 candidateXTechnologyRepository.save(result);
@@ -68,12 +67,13 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     }
 
 
+
     @Override
     public CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId) {
         CandidateXTechnologyModel candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
             return CandidateXTechnologyDto.builder()
                     .candidate(candidateXTechnology.getCandidate())
-                    .technology(candidateXTechnology.getTechnology())
+                    .technology(candidateXTechnology.getTechnologyModel())
                     .experience(candidateXTechnology.getExperience())
                     .build();
         }

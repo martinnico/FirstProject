@@ -1,8 +1,7 @@
 package com.demo.firstproject.controllers;
 
 import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.models.dto.CandidateXTEchnologyDto;
-import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
+import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidates;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +30,15 @@ public class CandidateXTechnologyController {
 
         }
         @PostMapping
-        public ResponseEntity<CandidateXTechnologyModel> createCandidateXTechnology(@RequestBody CandidateXTechnologyDtoSend candidateXTechnologyDtoSend) {
-            return new ResponseEntity<>(service.createCandidateXTechnology(candidateXTechnologyDtoSend),HttpStatus.CREATED);
+        public ResponseEntity<CandidateXTechnologyModel> createCandidateXTechnology(@RequestBody CandidateXTechnologyDto candidateXTechnologyDtoSend) {
+            service.createCandidateXTechnology(candidateXTechnologyDtoSend);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<CandidateXTechnologyModel> updateCandidateXTechnology(@PathVariable ("id") Long id,@RequestBody CandidateXTechnologyDtoSend candidateXTechnologyDtoSend) {
-            return new ResponseEntity<>(service.updateCandidateXTechnology(id,candidateXTechnologyDtoSend),HttpStatus.OK);
+        public ResponseEntity<CandidateXTechnologyModel> updateCandidateXTechnology(@PathVariable ("id") Long id,@RequestBody CandidateXTechnologyDto candidateXTechnologyDtoSend) {
+            service.updateCandidateXTechnology(id,candidateXTechnologyDtoSend);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
 
         @DeleteMapping("/{id}")
@@ -47,8 +48,9 @@ public class CandidateXTechnologyController {
         }
 
         @GetMapping(value = "/dto/{candidateId}")
-        public ResponseEntity<CandidateXTEchnologyDto> findCandidateXTechnologyDto(@PathVariable Long candidateId){
-        return new ResponseEntity<>(service.findCandidateXTechnologyDto(candidateId), HttpStatus.OK);
+        public ResponseEntity<CandidateXTechnologyDto> findCandidateXTechnologyDto(@PathVariable Long candidateId){
+            service.findCandidateXTechnologyDto(candidateId);
+            return new ResponseEntity<>(HttpStatus.OK);
     }
 
         @GetMapping(value = "/listcandidate")
