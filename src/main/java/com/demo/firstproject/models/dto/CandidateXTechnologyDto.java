@@ -1,7 +1,7 @@
 package com.demo.firstproject.models.dto;
 
-import com.demo.firstproject.models.CandidateModel;
-import com.demo.firstproject.models.TechnologyModel;
+import com.demo.firstproject.models.Candidate;
+import com.demo.firstproject.models.Technology;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CandidateXTechnologyDto {
-    private CandidateModel candidate;
-    private TechnologyModel technology;
+    private Candidate candidate;
+    private Technology technology;
     private String experience;
 
 }

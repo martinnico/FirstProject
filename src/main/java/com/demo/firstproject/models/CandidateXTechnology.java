@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @Table (name="candidateXTechnology")
 @Entity
-public class CandidateXTechnologyModel {
+public class CandidateXTechnology {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +19,11 @@ public class CandidateXTechnologyModel {
 
     @ManyToOne
     @JoinColumn(name = "candidate", referencedColumnName = "id")
-    private CandidateModel candidate;
+    private Candidate candidate;
 
     @ManyToOne
     @JoinColumn(name = "technologyModel",referencedColumnName = "idTechnology")
-    private TechnologyModel technologyModel;
+    private Technology technology;
 
     private String experience;
 

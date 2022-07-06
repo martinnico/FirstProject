@@ -1,6 +1,6 @@
 package com.demo.firstproject.controllers;
 
-import com.demo.firstproject.models.CandidateModel;
+import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.services.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CandidateController {
     private CandidateService service;
 
     @GetMapping
-    public ResponseEntity<List<CandidateModel>> getCandidate() {
+    public ResponseEntity<List<Candidate>> getCandidate() {
         return new ResponseEntity<>(service.getCandidate(), HttpStatus.OK);
 
     }

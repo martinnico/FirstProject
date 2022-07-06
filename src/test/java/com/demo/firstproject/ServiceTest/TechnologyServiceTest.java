@@ -1,7 +1,7 @@
 package com.demo.firstproject.ServiceTest;
 
 import com.demo.firstproject.exception.TechnologyNotFound;
-import com.demo.firstproject.models.TechnologyModel;
+import com.demo.firstproject.models.Technology;
 import com.demo.firstproject.repository.TechnologyRepository;
 import com.demo.firstproject.services.impl.TechnologyServiceImp;
 import org.junit.jupiter.api.Nested;
@@ -33,7 +33,7 @@ public class TechnologyServiceTest extends AbstractMVCService{
     @Test
     void getTechnologyTest() {
 
-        List<TechnologyModel> list = new ArrayList<>();
+        List<Technology> list = new ArrayList<>();
         list.add(createTechnologyModel());
         when(technologyRepository.findAll()).thenReturn(technologyModelList());
         assertEquals(list, technologyServiceImp.getTechnology());

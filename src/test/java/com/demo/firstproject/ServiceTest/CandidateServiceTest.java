@@ -1,7 +1,7 @@
 package com.demo.firstproject.ServiceTest;
 
 import com.demo.firstproject.exception.CandidateNotFound;
-import com.demo.firstproject.models.CandidateModel;
+import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.impl.CandidateServiceImp;
 import org.junit.jupiter.api.Test;
@@ -31,8 +31,8 @@ public class CandidateServiceTest extends AbstractMVCService {
 
     @Test
     void getCandidateTest (){
-        List<CandidateModel> list = candidateServiceImp.getCandidate();
-        List<CandidateModel> list2 = new ArrayList<>();
+        List<Candidate> list = candidateServiceImp.getCandidate();
+        List<Candidate> list2 = new ArrayList<>();
         when(candidateRepository.findAll()).thenReturn(list2);
         verify(candidateRepository,times(1)).findAll();
         assertEquals(list, candidateRepository.findAll());

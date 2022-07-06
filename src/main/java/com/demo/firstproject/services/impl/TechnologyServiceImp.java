@@ -11,7 +11,7 @@ import com.demo.firstproject.services.TechnologyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.demo.firstproject.models.TechnologyModel;
+import com.demo.firstproject.models.Technology;
 
 
 @Slf4j
@@ -22,13 +22,13 @@ public class TechnologyServiceImp implements TechnologyService {
     private TechnologyRepository technologyRepository;
 
 
-    public List<TechnologyModel> getTechnology() {
+    public List<Technology> getTechnology() {
         return  technologyRepository.findAll();
     }
 
     public void createTechnology(TechnologyDto technologyDto)
     {
-         technologyRepository.save(TechnologyModel.builder()
+         technologyRepository.save(Technology.builder()
                         .nameTechnology(technologyDto.getNameTechnology())
                         .version(technologyDto.getVersion())
                         .build());
@@ -36,10 +36,10 @@ public class TechnologyServiceImp implements TechnologyService {
     }
 
     public void updateTechnology(Long id, TechnologyDto technologyDto) {
-        TechnologyModel result = technologyRepository.findById(id).orElseThrow(() -> new TechnologyNotFoundException("Tecnologia no encontrada "));
+        Technology result = technologyRepository.findById(id).orElseThrow(() -> new TechnologyNotFoundException("Tecnologia no encontrada "));
         try {
         if (result != null) {
-            result = TechnologyModel.builder()
+            result = Technology.builder()
                     .nameTechnology(technologyDto.getNameTechnology())
                     .version(technologyDto.getVersion())
                     .build();
@@ -51,7 +51,7 @@ public class TechnologyServiceImp implements TechnologyService {
     }
 
     public void deleteTechnology (Long id){
-        Optional<TechnologyModel> result = technologyRepository.findById(id);
+        Optional<Technology> result = technologyRepository.findById(id);
         try {
             if (result.isPresent()) {
                 technologyRepository.delete(result.get());
@@ -64,10 +64,10 @@ public class TechnologyServiceImp implements TechnologyService {
 
 
     public TechnologyDto findTechnologyDto (Long id){
-        TechnologyModel technologyModel = technologyRepository.findById(id).orElseThrow(()->new TechnologyNotFoundException("Tecnologia no encontrada "));;
+        Technology technology = technologyRepository.findById(id).orElseThrow(()->new TechnologyNotFoundException("Tecnologia no encontrada "));;
         return  TechnologyDto.builder()
-                .nameTechnology(technologyModel.getNameTechnology())
-                .version(technologyModel.getVersion())
+                .nameTechnology(technology.getNameTechnology())
+                .version(technology.getVersion())
                 .build();
 
     }

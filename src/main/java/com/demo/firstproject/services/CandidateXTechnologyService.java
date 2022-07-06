@@ -1,13 +1,13 @@
 package com.demo.firstproject.services;
 
-import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.models.CandidateXTechnology;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 
 import java.util.List;
 
 public interface CandidateXTechnologyService {
 
-     List<CandidateXTechnologyModel> getCandidateXTechnology();
+     List<CandidateXTechnology> getCandidateXTechnology();
 
      void createCandidateXTechnology(CandidateXTechnologyDto candidateXTechnologyDtoSend);
 

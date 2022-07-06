@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
 @Data
 @Entity
 @Table(name="Candidate")
-public class CandidateModel {
+public class Candidate {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,8 @@
 package com.demo.firstproject.testUtils;
 
-import com.demo.firstproject.models.CandidateModel;
-import com.demo.firstproject.models.CandidateXTechnologyModel;
-import com.demo.firstproject.models.TechnologyModel;
+import com.demo.firstproject.models.Candidate;
+import com.demo.firstproject.models.CandidateXTechnology;
+import com.demo.firstproject.models.Technology;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.models.dto.TechnologyDto;
@@ -40,8 +40,8 @@ public class TestEntityFactory {
     }
 
 
-    public static CandidateModel createCandidateModel () {
-        CandidateModel candidateModel = CandidateModel
+    public static Candidate createCandidateModel () {
+        Candidate candidate = Candidate
                 .builder()
                 .id(1L)
                 .name("martin")
@@ -50,16 +50,16 @@ public class TestEntityFactory {
                 .typeDni(TypeOfDni.DNI)
 
                 .build();
-        return candidateModel;
+        return candidate;
     }
 
-    public static TechnologyModel createTechnologyModel (){
-        TechnologyModel technologyModel = TechnologyModel
+    public static Technology createTechnologyModel (){
+        Technology technology = Technology
                 .builder()
                 .nameTechnology("JAVA")
                 .version("8")
                 .build();
-        return technologyModel;
+        return technology;
 
     }
 
@@ -82,18 +82,18 @@ public class TestEntityFactory {
 
     }
 
-    public static CandidateXTechnologyModel createCandidateXTEchnologyModel (){
-        CandidateXTechnologyModel candidateXTechnologyModel = CandidateXTechnologyModel
+    public static CandidateXTechnology createCandidateXTEchnologyModel (){
+        CandidateXTechnology candidateXTechnology = CandidateXTechnology
                 .builder()
                 .candidate(createCandidateModel())
-                .technologyModel(createTechnologyModel())
+                .technology(createTechnologyModel())
                 .experience("3")
                 .build();
-        return candidateXTechnologyModel;
+        return candidateXTechnology;
     }
 
-    public static List<CandidateXTechnologyModel> createCandidateXTechnologyModelList (){
-        List<CandidateXTechnologyModel> list = new ArrayList<>();
+    public static List<CandidateXTechnology> createCandidateXTechnologyModelList (){
+        List<CandidateXTechnology> list = new ArrayList<>();
         list.add(createCandidateXTEchnologyModel());
         return list;
     }
@@ -104,14 +104,14 @@ public class TestEntityFactory {
         return list;
     }
 
-    public static List <CandidateModel> candidateModelList () {
-        List<CandidateModel> list = new ArrayList<>();
+    public static List <Candidate> candidateModelList () {
+        List<Candidate> list = new ArrayList<>();
         list.add(createCandidateModel());
         return list;
     }
 
-    public static List<TechnologyModel> technologyModelList (){
-        List<TechnologyModel> list = new ArrayList<>();
+    public static List<Technology> technologyModelList (){
+        List<Technology> list = new ArrayList<>();
         list.add(createTechnologyModel());
         return list;
     }

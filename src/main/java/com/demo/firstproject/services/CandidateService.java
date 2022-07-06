@@ -1,5 +1,5 @@
 package com.demo.firstproject.services;
-import com.demo.firstproject.models.CandidateModel;
+import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.models.dto.CandidateDto;
 
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CandidateService {
 
-     List<CandidateModel> getCandidate();
+     List<Candidate> getCandidate();
 
      void createCandidate(CandidateDto candidateDto);
 

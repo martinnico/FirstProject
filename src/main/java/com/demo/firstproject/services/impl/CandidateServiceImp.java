@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.demo.firstproject.exception.CandidateNotFoundException;
-import com.demo.firstproject.models.CandidateModel;
+import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.CandidateService;
@@ -22,13 +22,13 @@ public class CandidateServiceImp implements CandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public List<CandidateModel>getCandidate() {
+    public List<Candidate>getCandidate() {
         return  candidateRepository.findAll();
     }
 
     @Override
     public void createCandidate(CandidateDto candidateDto){
-        CandidateModel candidate = CandidateModel
+        Candidate candidate = Candidate
                 .builder()
                 .name(candidateDto.getName())
                 .lastName(candidateDto.getLastName())
@@ -42,10 +42,10 @@ public class CandidateServiceImp implements CandidateService {
 
     @Override
     public void updateCandidate(Long id, CandidateDto candidateDto){
-        CandidateModel result = candidateRepository.findById(id).orElseThrow(()->new CandidateNotFoundException("Candidato no encontrado "));
+        Candidate result = candidateRepository.findById(id).orElseThrow(()->new CandidateNotFoundException("Candidato no encontrado "));
         try {
         if( result!= null ){
-              result = CandidateModel.builder()
+              result = Candidate.builder()
                       .name(candidateDto.getName())
                       .lastName(candidateDto.getLastName())
                       .typeDni(candidateDto.getTypeDni())
@@ -60,7 +60,7 @@ public class CandidateServiceImp implements CandidateService {
     @Override
     public void deleteCandidate (Long id){
 
-        Optional<CandidateModel> result = candidateRepository.findById(id);
+        Optional<Candidate> result = candidateRepository.findById(id);
         try{
             result.isPresent();
                 candidateRepository.delete(result.get());
@@ -73,10 +73,10 @@ public class CandidateServiceImp implements CandidateService {
 
     @Override
     public CandidateDto findCandidateDto (Long id){
-        CandidateModel candidateModel = candidateRepository.getById(id);
+        Candidate candidate = candidateRepository.getById(id);
         return  CandidateDto.builder()
-                .name(candidateModel.getName())
-                .lastName(candidateModel.getLastName())
+                .name(candidate.getName())
+                .lastName(candidate.getLastName())
                 .build();
 
     }

@@ -1,7 +1,7 @@
 package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
-import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.models.CandidateXTechnology;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidatesProjection;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
@@ -19,30 +19,30 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     @Autowired
     private CandidateXTechnologyRepository candidateXTechnologyRepository;
 
-    public List<CandidateXTechnologyModel> getCandidateXTechnology() {
+    public List<CandidateXTechnology> getCandidateXTechnology() {
         return candidateXTechnologyRepository.findAll();
     }
 
     @Override
     public void createCandidateXTechnology(CandidateXTechnologyDto candidateXTechnologySendDto) {
-        CandidateXTechnologyModel candidateXTechnologyModel = CandidateXTechnologyModel
+        CandidateXTechnology candidateXTechnology = CandidateXTechnology
                 .builder()
                 .candidate(candidateXTechnologySendDto.getCandidate())
-                .technologyModel(candidateXTechnologySendDto.getTechnology())
+                .technology(candidateXTechnologySendDto.getTechnology())
                 .experience(candidateXTechnologySendDto.getExperience())
                 .build();
-        candidateXTechnologyRepository.save(candidateXTechnologyModel);
-        log.debug("Se agrego el objeto: " + candidateXTechnologyModel);
+        candidateXTechnologyRepository.save(candidateXTechnology);
+        log.debug("Se agrego el objeto: " + candidateXTechnology);
     }
 
     @Override
     public void updateCandidateXTechnology(Long id, CandidateXTechnologyDto candidateXTechnologySendDto) {
-        CandidateXTechnologyModel result = candidateXTechnologyRepository.findById(id).orElseThrow(() -> new CandidateXTechnologyNotFoundException("Objeto no encontrado "));
+        CandidateXTechnology result = candidateXTechnologyRepository.findById(id).orElseThrow(() -> new CandidateXTechnologyNotFoundException("Objeto no encontrado "));
         try {
             if (result != null) {
-                result = CandidateXTechnologyModel.builder()
+                result = CandidateXTechnology.builder()
                         .candidate(candidateXTechnologySendDto.getCandidate())
-                        .technologyModel(candidateXTechnologySendDto.getTechnology())
+                        .technology(candidateXTechnologySendDto.getTechnology())
                         .experience(candidateXTechnologySendDto.getExperience())
                         .build();
                 candidateXTechnologyRepository.save(result);
@@ -56,7 +56,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     public void deleteCandidateXTechnology(Long id) {
 
 
-        Optional<CandidateXTechnologyModel> result = candidateXTechnologyRepository.findById(id);
+        Optional<CandidateXTechnology> result = candidateXTechnologyRepository.findById(id);
         try {
             if (result.isPresent()) {
                 candidateXTechnologyRepository.delete(result.get());
@@ -67,16 +67,15 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     }
 
 
-
     @Override
     public CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId) {
-        CandidateXTechnologyModel candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
-            return CandidateXTechnologyDto.builder()
-                    .candidate(candidateXTechnology.getCandidate())
-                    .technology(candidateXTechnology.getTechnologyModel())
-                    .experience(candidateXTechnology.getExperience())
-                    .build();
-        }
+        CandidateXTechnology candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
+        return CandidateXTechnologyDto.builder()
+                .candidate(candidateXTechnology.getCandidate())
+                .technology(candidateXTechnology.getTechnology())
+                .experience(candidateXTechnology.getExperience())
+                .build();
+    }
 
     public List<ListCandidatesProjection> listCandidatesXTechnologies(String technology) {
         return candidateXTechnologyRepository.listCandidatesXTechnology(technology);

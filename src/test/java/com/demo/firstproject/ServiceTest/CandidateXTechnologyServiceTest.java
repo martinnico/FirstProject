@@ -1,7 +1,7 @@
 package com.demo.firstproject.ServiceTest;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
-import com.demo.firstproject.models.CandidateXTechnologyModel;
+import com.demo.firstproject.models.CandidateXTechnology;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import org.junit.jupiter.api.Nested;
@@ -34,7 +34,7 @@ public class CandidateXTechnologyServiceTest extends AbstractMVCService {
     @Test
     void getCandidateXTechnologyTest (){
 
-        List<CandidateXTechnologyModel> list = new ArrayList<>();
+        List<CandidateXTechnology> list = new ArrayList<>();
         list.add(createCandidateXTEchnologyModel());
         when(candidateXTechnologyRepository.findAll()).thenReturn(createCandidateXTechnologyModelList());
         assertEquals(list,candidateXTechnologyServiceImp.getCandidateXTechnology());

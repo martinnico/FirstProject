@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.demo.firstproject.models.TechnologyModel;
+import com.demo.firstproject.models.Technology;
 import java.util.List;
 
 @RestController
@@ -24,18 +24,20 @@ public class TechnologyController {
     private TechnologyService service;
 
     @GetMapping
-    public ResponseEntity <List<TechnologyModel>> getTechnology(){
+    public ResponseEntity <List<Technology>> getTechnology(){
         return new ResponseEntity<>(service.getTechnology(),HttpStatus.OK);
 
     }
     @PostMapping
-    public ResponseEntity<TechnologyModel> createTechnology(@RequestBody TechnologyDto technologyDto) {
-        return new ResponseEntity<>(service.createTechnology(technologyDto),HttpStatus.CREATED);
+    public ResponseEntity<Technology> createTechnology(@RequestBody TechnologyDto technologyDto) {
+        service.createTechnology(technologyDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TechnologyModel> updateTechnology(@PathVariable ("id") Long id,@RequestBody TechnologyDto technologyDto) {
-        return new ResponseEntity<>(service.updateTechnology(id,technologyDto),HttpStatus.OK);
+    public ResponseEntity<Technology> updateTechnology(@PathVariable ("id") Long id, @RequestBody TechnologyDto technologyDto) {
+        service.updateTechnology(id,technologyDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
