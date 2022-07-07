@@ -44,9 +44,10 @@ public class TechnologyServiceImp implements TechnologyService {
                     .version(technologyDto.getVersion())
                     .build();
             technologyRepository.save(result);
+            log.debug("Se actualizo la tecnologia: "+ result);
         }
         } catch (TechnologyNotFoundException t){
-            log.error("La tecnologia con id: "+id+" no se ha encontrado");
+            log.error("La tecnologia con id: ",t);
         }
     }
 
@@ -55,9 +56,10 @@ public class TechnologyServiceImp implements TechnologyService {
         try {
             if (result.isPresent()) {
                 technologyRepository.delete(result.get());
+                log.debug("se elimino la tecnologia: "+result);
             }
         }catch (TechnologyNotFoundException t){
-            log.error("La tecnologia con el id: "+id+" no se ha encontrado");
+            log.error("La tecnologia con el id:",t);
         }
     }
 
@@ -65,6 +67,7 @@ public class TechnologyServiceImp implements TechnologyService {
 
     public TechnologyDto findTechnologyDto (Long id){
         Technology technology = technologyRepository.findById(id).orElseThrow(()->new TechnologyNotFoundException("Tecnologia no encontrada "));;
+        log.debug("Se mostrara la tecnologia: "+technology);
         return  TechnologyDto.builder()
                 .nameTechnology(technology.getNameTechnology())
                 .version(technology.getVersion())
