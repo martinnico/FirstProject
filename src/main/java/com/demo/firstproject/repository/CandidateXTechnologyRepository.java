@@ -1,7 +1,6 @@
 package com.demo.firstproject.repository;
 
 import com.demo.firstproject.models.CandidateXTechnology;
-import com.demo.firstproject.models.dto.CandidateXTechnologyDtoSend;
 import com.demo.firstproject.projections.ListCandidatesProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
