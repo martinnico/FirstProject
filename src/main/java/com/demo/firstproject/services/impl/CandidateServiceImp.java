@@ -26,6 +26,7 @@ public class CandidateServiceImp implements CandidateService {
         return  candidateRepository.findAll();
     }
 
+
     @Override
     public void createCandidate(CandidateDto candidateDto){
         Candidate candidate = Candidate
@@ -53,8 +54,9 @@ public class CandidateServiceImp implements CandidateService {
                       .dateOfBirth(candidateDto.getDateOfBirth())
                       .build();
               candidateRepository.save(result);
+              log.debug("Se actualizo el candidato: "+result);
           } }catch (CandidateNotFoundException c){
-                log.error("El candidato con ID: "+id+" no se ha encontrado");
+                log.error("El candidato no se ha encontrado: ",c);
           }
     }
     @Override
@@ -64,8 +66,9 @@ public class CandidateServiceImp implements CandidateService {
         try{
             result.isPresent();
                 candidateRepository.delete(result.get());
+                log.debug("Se elimino el candidato: "+result);
             }catch(CandidateNotFoundException e){
-                log.error("El Candidato con id: " + id + "no se ha encontrado");
+                log.error("El Candidato con id: ",e);
 
             }
         }
@@ -74,10 +77,11 @@ public class CandidateServiceImp implements CandidateService {
     @Override
     public CandidateDto findCandidateDto (Long id){
         Candidate candidate = candidateRepository.getById(id);
+        log.debug("Se retorna el candidato: "+candidate);
         return  CandidateDto.builder()
                 .name(candidate.getName())
                 .lastName(candidate.getLastName())
                 .build();
-
     }
+
 }
