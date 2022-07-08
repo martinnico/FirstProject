@@ -91,8 +91,9 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
             log.debug("Se listaran las experiencias de los candidatos");
             return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
         } catch (CandidateXTechnologyNotFoundException c) {
-            log.error("La lista esta vacia", c);
+            log.error( c.getMessage());
+
         }
-        return null;
+        return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
     }
 }
