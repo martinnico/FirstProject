@@ -32,7 +32,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
                 .experience(candidateXTechnologySendDto.getExperience())
                 .build();
         candidateXTechnologyRepository.save(candidateXTechnology);
-        log.debug("Se agrego el objeto: " + candidateXTechnology);
+        log.debug("Se agrego la experiencia: " + candidateXTechnology);
     }
 
     @Override
@@ -46,9 +46,10 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
                         .experience(candidateXTechnologySendDto.getExperience())
                         .build();
                 candidateXTechnologyRepository.save(result);
+                log.debug("Se actualizo la experiencia: "+result);
             }
         } catch (CandidateXTechnologyNotFoundException c) {
-            log.error("El objeto con ID: " + id + " no se ha encontrado");
+            log.error("El objeto con ID: ",c);
         }
     }
 
@@ -60,9 +61,10 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
         try {
             if (result.isPresent()) {
                 candidateXTechnologyRepository.delete(result.get());
+                log.debug("Se elimino la experiencia: "+result);
             }
         } catch (CandidateXTechnologyNotFoundException c) {
-            log.error("El objeto con ID: " + id + " no se ha encontrado");
+            log.error("La experiencia con el ID ingresado se elimino: ", c);
         }
     }
 
@@ -70,6 +72,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     @Override
     public CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId) {
         CandidateXTechnology candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
+        log.debug("Se mostrara la experiencia: "+candidateXTechnology);
         return CandidateXTechnologyDto.builder()
                 .candidate(candidateXTechnology.getCandidate())
                 .technology(candidateXTechnology.getTechnology())
@@ -78,6 +81,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     }
 
     public List<ListCandidatesProjection> listCandidatesXTechnologies(String technology) {
+        log.debug("Se listaran las experiencias de los candidatos" );
         return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
     }
 }

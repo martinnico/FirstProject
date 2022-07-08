@@ -1,6 +1,7 @@
 package com.demo.firstproject.ServiceTest;
 
-import com.demo.firstproject.exception.TechnologyNotFound;
+
+import com.demo.firstproject.exception.TechnologyNotFoundException;
 import com.demo.firstproject.models.Technology;
 import com.demo.firstproject.repository.TechnologyRepository;
 import com.demo.firstproject.services.impl.TechnologyServiceImp;
@@ -61,8 +62,8 @@ public class TechnologyServiceTest extends AbstractMVCService{
 
         @Test
         void updateTechnologyTestFail (){
-            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFound.class);
-            assertThrows(TechnologyNotFound.class, () -> technologyServiceImp.updateTechnology(2L, createTechnologyDto()));
+            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFoundException.class);
+            assertThrows(TechnologyNotFoundException.class, () -> technologyServiceImp.updateTechnology(2L, createTechnologyDto()));
         }
     }
 
@@ -81,8 +82,8 @@ public class TechnologyServiceTest extends AbstractMVCService{
 
         @Test
         void deleteTechnologyTestFail (){
-            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFound.class);
-            assertThrows(TechnologyNotFound.class, () -> technologyServiceImp.deleteTechnology(2L));
+            when(technologyRepository.findById(2L)).thenThrow(TechnologyNotFoundException.class);
+            assertThrows(TechnologyNotFoundException.class, () -> technologyServiceImp.deleteTechnology(2L));
         }
     }
 
