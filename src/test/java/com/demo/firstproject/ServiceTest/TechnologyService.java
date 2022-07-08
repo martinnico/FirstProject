@@ -92,6 +92,7 @@ public class TechnologyService extends AbstractMVCService{
 
         when(technologyRepository.getById(1L)).thenReturn(createTechnologyModel());
         technologyServiceImp.findTechnologyDto(1L);
+        verify(technologyRepository,times(1)).findById(1L);
 
     }
 }

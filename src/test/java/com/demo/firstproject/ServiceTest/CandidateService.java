@@ -4,6 +4,7 @@ import com.demo.firstproject.exception.CandidateNotFoundException;
 import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.impl.CandidateServiceImp;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -47,44 +48,47 @@ public class CandidateService extends AbstractMVCService {
 
     }
 
-    @Test
-    void updateCandidateTest (){
+    @Nested
+    class updateCandidateTest {
+        @Test
+        void updateCandidateTest() {
 
-        when(candidateRepository.findById(1L)).thenReturn(Optional.of(createCandidateModel()));
-        candidateRepository.save(createCandidateModel());
-        verify(candidateRepository,times(1)).save((createCandidateModel()));
-        candidateServiceImp.updateCandidate(1L,createCandidateDto());
+            when(candidateRepository.findById(1L)).thenReturn(Optional.of(createCandidateModel()));
+            candidateRepository.save(createCandidateModel());
+            verify(candidateRepository, times(1)).save((createCandidateModel()));
+            candidateServiceImp.updateCandidate(1L, createCandidateDto());
+        }
+
+
+        @Test
+        void updateCandidateTestFail() {
+
+            assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
+
+        }
     }
 
+    @Nested
+    class deleteCandidateTest {
+        @Test
+        void deleteCandidateTest() {
 
-    @Test
-    void updateCandidateTestFile (){
 
-        assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
+            when(candidateRepository.findById(1L))
+                    .thenReturn(Optional.of(createCandidateModel()));
+            candidateRepository.delete(createCandidateModel());
+            verify(candidateRepository, times(1)).delete(createCandidateModel());
 
+            candidateServiceImp.deleteCandidate(createCandidateModel().getId());
+
+            assertTrue(!createCandidateModel().isActive());
+        }
+
+        @Test
+        void deleteCandidateTestFail() {
+            assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.deleteCandidate(2L));
+        }
     }
-
-
-    @Test
-    void deleteCandidateTest (){
-
-
-        when(candidateRepository.findById(1L))
-                        .thenReturn(Optional.of(createCandidateModel()));
-        candidateRepository.delete(createCandidateModel());
-        verify(candidateRepository,times(1)).delete(createCandidateModel());
-
-        candidateServiceImp.deleteCandidate(createCandidateModel().getId());
-
-        assertTrue(!createCandidateModel().isActive());
-    }
-
-    @Test
-    void deleteCandidateTestFail (){
-
-        assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.deleteCandidate(2L));
-    }
-
     @Test
     void findCandidateDtoTest () {
 
