@@ -2,7 +2,6 @@ package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
 import com.demo.firstproject.models.CandidateXTechnology;
-import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidatesProjection;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
