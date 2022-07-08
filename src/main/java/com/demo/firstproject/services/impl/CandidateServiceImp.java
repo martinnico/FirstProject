@@ -64,11 +64,12 @@ public class CandidateServiceImp implements CandidateService {
 
         Optional<Candidate> result = candidateRepository.findById(id);
         try{
-            result.isPresent();
+            if (result.isPresent()) {
                 candidateRepository.delete(result.get());
-                log.debug("Se elimino el candidato: "+result);
+                log.debug("Se elimino el candidato: " + result);
+            }
             }catch(CandidateNotFoundException e){
-                log.error("El Candidato con id: ",e);
+                log.error("El Candidato con el ID seleccionado no existe: ",e);
 
             }
         }
