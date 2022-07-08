@@ -1,6 +1,6 @@
 package com.demo.firstproject.ServiceTest;
 
-import com.demo.firstproject.exception.CandidateNotFound;
+import com.demo.firstproject.exception.CandidateNotFoundException;
 import com.demo.firstproject.models.Candidate;
 import com.demo.firstproject.repository.CandidateRepository;
 import com.demo.firstproject.services.impl.CandidateServiceImp;
@@ -60,7 +60,7 @@ public class CandidateServiceTest extends AbstractMVCService {
     @Test
     void updateCandidateTestFile (){
 
-        assertThrows(CandidateNotFound.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
+        assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
 
     }
 
@@ -82,7 +82,7 @@ public class CandidateServiceTest extends AbstractMVCService {
     @Test
     void deleteCandidateTestFail (){
 
-        assertThrows(CandidateNotFound.class, () -> candidateServiceImp.deleteCandidate(2L));
+        assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.deleteCandidate(2L));
     }
 
     @Test

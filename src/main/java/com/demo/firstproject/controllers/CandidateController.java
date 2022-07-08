@@ -24,7 +24,7 @@ import java.util.List;
 
 
 
-@Tag(name = "Candidatos")
+
 @RestController
 @RequestMapping("/candidate")
 public class CandidateController {
