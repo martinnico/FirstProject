@@ -32,6 +32,7 @@ public class TestEntityFactory {
     public static CandidateXTechnologyDto createCandidateXTechnologyDtoSend (){
         CandidateXTechnologyDto candidateXTechnologyDtoSend = CandidateXTechnologyDto
                 .builder()
+                .id(1L)
                 .candidate(createCandidateModel())
                 .technology(createTechnologyModel())
                 .experience("3")

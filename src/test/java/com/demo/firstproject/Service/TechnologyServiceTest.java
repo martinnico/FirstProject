@@ -1,4 +1,4 @@
-package com.demo.firstproject.ServiceTest;
+package com.demo.firstproject.Service;
 
 
 import com.demo.firstproject.exception.TechnologyNotFoundException;
@@ -18,12 +18,13 @@ import static com.demo.firstproject.testUtils.TestEntityFactory.createTechnology
 import static com.demo.firstproject.testUtils.TestEntityFactory.technologyModelList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TechnologyService extends AbstractMVCService{
+public class TechnologyServiceTest extends AbstractMVCService{
 
     @InjectMocks
     TechnologyServiceImp technologyServiceImp;
@@ -90,9 +91,9 @@ public class TechnologyService extends AbstractMVCService{
     @Test
     void findTechnologyDtoTest () {
 
-        when(technologyRepository.getById(1L)).thenReturn(createTechnologyModel());
-        technologyServiceImp.findTechnologyDto(1L);
-        verify(technologyRepository,times(1)).findById(1L);
+        when(technologyRepository.findById(anyLong())).thenReturn(Optional.of(createTechnologyModel()));
+        technologyServiceImp.findTechnologyDto(anyLong());
+        verify(technologyRepository,times(1)).findById(anyLong());
 
     }
 }

@@ -1,4 +1,4 @@
-package com.demo.firstproject.ServiceTest;
+package com.demo.firstproject.Service;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
 import com.demo.firstproject.models.CandidateXTechnology;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class CandidateXTechnologyService extends AbstractMVCService {
+public class CandidateXTechnologyServiceTest extends AbstractMVCService {
 
     @InjectMocks
     CandidateXTechnologyServiceImp candidateXTechnologyServiceImp;

@@ -68,7 +68,7 @@ public class CandidateXTechnologyController {
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> deleteCandidateXTechnology(@PathVariable ("id") Long id){
             service.deleteCandidateXTechnology(id);
-            return new ResponseEntity<> (HttpStatus.NO_CONTENT) ;
+            return new ResponseEntity<> (HttpStatus.OK) ;
         }
 
          @Operation(summary = "Get All Experiences by Candidates Id")
@@ -77,9 +77,8 @@ public class CandidateXTechnologyController {
                 @ApiResponse(responseCode = "404", description = "Candidate Id not found", content = @Content)
     })
         @GetMapping(value = "/dto/{candidateId}")
-        public ResponseEntity<CandidateXTechnologyDto> findCandidateXTechnologyDto(@PathVariable Long candidateId){
-            service.findCandidateXTechnologyDto(candidateId);
-            return new ResponseEntity<>(HttpStatus.OK);
+        public ResponseEntity<CandidateXTechnologyDto>findCandidateXTechnologyDto(@PathVariable Long candidateId){
+            return new ResponseEntity<>(service.findCandidateXTechnologyDto(candidateId),HttpStatus.OK);
     }
 
     @Operation(summary = "Get All Experiences")

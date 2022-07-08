@@ -66,12 +66,13 @@ public class TechnologyServiceImp implements TechnologyService {
 
 
     public TechnologyDto findTechnologyDto (Long id){
-        Technology technology = technologyRepository.findById(id).orElseThrow(()->new TechnologyNotFoundException("Tecnologia no encontrada "));;
-        log.debug("Se mostrara la tecnologia: "+technology);
-        return  TechnologyDto.builder()
-                .nameTechnology(technology.getNameTechnology())
-                .version(technology.getVersion())
-                .build();
-
+        Technology technology = technologyRepository.findById(id).orElseThrow(()->new TechnologyNotFoundException("Tecnologia no encontrada "));
+        TechnologyDto technologyDto;
+            log.debug("Se mostrara la tecnologia: " + technology);
+             technologyDto= TechnologyDto.builder()
+                    .nameTechnology(technology.getNameTechnology())
+                    .version(technology.getVersion())
+                    .build();
+            return technologyDto;
     }
 }

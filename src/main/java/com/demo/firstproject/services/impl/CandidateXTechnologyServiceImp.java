@@ -2,6 +2,7 @@ package com.demo.firstproject.services.impl;
 
 import com.demo.firstproject.exception.CandidateXTechnologyNotFoundException;
 import com.demo.firstproject.models.CandidateXTechnology;
+import com.demo.firstproject.models.dto.CandidateDto;
 import com.demo.firstproject.models.dto.CandidateXTechnologyDto;
 import com.demo.firstproject.projections.ListCandidatesProjection;
 import com.demo.firstproject.repository.CandidateXTechnologyRepository;
@@ -46,10 +47,10 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
                         .experience(candidateXTechnologySendDto.getExperience())
                         .build();
                 candidateXTechnologyRepository.save(result);
-                log.debug("Se actualizo la experiencia: "+result);
+                log.debug("Se actualizo la experiencia: " + result);
             }
         } catch (CandidateXTechnologyNotFoundException c) {
-            log.error("El objeto con ID: ",c);
+            log.error("El objeto con el ID ingresado no se encontro: ", c);
         }
     }
 
@@ -61,7 +62,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
         try {
             if (result.isPresent()) {
                 candidateXTechnologyRepository.delete(result.get());
-                log.debug("Se elimino la experiencia: "+result);
+                log.debug("Se elimino la experiencia: " + result);
             }
         } catch (CandidateXTechnologyNotFoundException c) {
             log.error("La experiencia con el ID ingresado se elimino: ", c);
@@ -72,16 +73,26 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
     @Override
     public CandidateXTechnologyDto findCandidateXTechnologyDto(Long candidateId) {
         CandidateXTechnology candidateXTechnology = candidateXTechnologyRepository.findByCandidateId(candidateId);
-        log.debug("Se mostrara la experiencia: "+candidateXTechnology);
-        return CandidateXTechnologyDto.builder()
-                .candidate(candidateXTechnology.getCandidate())
-                .technology(candidateXTechnology.getTechnology())
-                .experience(candidateXTechnology.getExperience())
-                .build();
+        try {
+            log.debug("Se mostrara la experiencia: " + candidateXTechnology);
+            return CandidateXTechnologyDto.builder()
+                    .candidate(candidateXTechnology.getCandidate())
+                    .technology(candidateXTechnology.getTechnology())
+                    .experience(candidateXTechnology.getExperience())
+                    .build();
+        } catch (CandidateXTechnologyNotFoundException c) {
+            log.error("No se ha podido encontrar el Id solicitado:", c);
+        }
+        return null;
     }
 
     public List<ListCandidatesProjection> listCandidatesXTechnologies(String technology) {
-        log.debug("Se listaran las experiencias de los candidatos" );
-        return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
+        try {
+            log.debug("Se listaran las experiencias de los candidatos");
+            return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
+        } catch (CandidateXTechnologyNotFoundException c) {
+            log.error("La lista esta vacia", c);
+        }
+        return null;
     }
 }

@@ -1,8 +1,9 @@
-package com.demo.firstproject.ControllerTest;
+package com.demo.firstproject.Controller;
 import com.demo.firstproject.services.CandidateService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import javax.ws.rs.core.MediaType;
 import static com.demo.firstproject.testUtils.TestEntityFactory.createCandidateDto;
@@ -10,7 +11,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class CandidateController extends AbstractMVCTest {
+class CandidateControllerTest extends AbstractMVCTest {
 
     @MockBean
     CandidateService candidateService;
@@ -18,8 +19,10 @@ class CandidateController extends AbstractMVCTest {
 
     @Test
     void getCandidateTest () throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/candidate"))
-                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/candidate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .headers(new HttpHeaders()))
+                        .andExpect(status().isOk());
     }
 
     @Test
@@ -60,7 +63,8 @@ class CandidateController extends AbstractMVCTest {
     @Test
     void findCandidateDto () throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/candidate/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/candidate/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect((status().isOk()));
     }
 }

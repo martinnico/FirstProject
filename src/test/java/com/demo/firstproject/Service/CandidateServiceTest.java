@@ -1,4 +1,4 @@
-package com.demo.firstproject.ServiceTest;
+package com.demo.firstproject.Service;
 
 import com.demo.firstproject.exception.CandidateNotFoundException;
 import com.demo.firstproject.models.Candidate;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-public class CandidateService extends AbstractMVCService {
+public class CandidateServiceTest extends AbstractMVCService {
 
 
     @InjectMocks
@@ -62,7 +62,6 @@ public class CandidateService extends AbstractMVCService {
 
         @Test
         void updateCandidateTestFail() {
-
             assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.updateCandidate(2L, createCandidateDto()));
 
         }
@@ -86,6 +85,7 @@ public class CandidateService extends AbstractMVCService {
 
         @Test
         void deleteCandidateTestFail() {
+            when(candidateRepository.findById(2L)).thenThrow(CandidateNotFoundException.class);
             assertThrows(CandidateNotFoundException.class, () -> candidateServiceImp.deleteCandidate(2L));
         }
     }

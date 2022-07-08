@@ -78,11 +78,16 @@ public class CandidateServiceImp implements CandidateService {
     @Override
     public CandidateDto findCandidateDto (Long id){
         Candidate candidate = candidateRepository.getById(id);
-        log.debug("Se retorna el candidato: "+candidate);
-        return  CandidateDto.builder()
-                .name(candidate.getName())
-                .lastName(candidate.getLastName())
-                .build();
+        try {
+            log.debug("Se retorna el candidato: " + candidate);
+            return CandidateDto.builder()
+                    .name(candidate.getName())
+                    .lastName(candidate.getLastName())
+                    .build();
+        }catch (CandidateNotFoundException c){
+            log.error("Candidato no encontrado",c);
+        }
+        return null;
     }
 
 }

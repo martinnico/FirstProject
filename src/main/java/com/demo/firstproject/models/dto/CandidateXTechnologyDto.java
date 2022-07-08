@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CandidateXTechnologyDto {
+    private Long id;
     private Candidate candidate;
     private Technology technology;
     private String experience;
