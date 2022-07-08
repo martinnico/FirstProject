@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-public class CandidateServiceTest extends AbstractMVCService {
+public class CandidateService extends AbstractMVCService {
 
 
     @InjectMocks

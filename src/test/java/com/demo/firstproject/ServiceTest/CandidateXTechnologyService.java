@@ -23,7 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class CandidateXTechnologyServiceTest extends AbstractMVCService {
+public class CandidateXTechnologyService extends AbstractMVCService {
 
     @InjectMocks
     CandidateXTechnologyServiceImp candidateXTechnologyServiceImp;

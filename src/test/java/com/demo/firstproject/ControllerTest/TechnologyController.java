@@ -13,7 +13,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
- class TechnologyControllerTest extends  AbstractMVCTest{
+ class TechnologyController extends  AbstractMVCTest{
 
     @MockBean
     TechnologyService technologyService;

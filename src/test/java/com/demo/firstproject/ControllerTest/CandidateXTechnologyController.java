@@ -15,7 +15,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class CandidateXTechnologyControllerTest extends AbstractMVCTest{
+class CandidateXTechnologyController extends AbstractMVCTest{
 
     @MockBean
     CandidateXTechnologyService candidateXTechnologyService;

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class CandidateControllerTest extends AbstractMVCTest {
+class CandidateController extends AbstractMVCTest {
 
     @MockBean
     CandidateService candidateService;
