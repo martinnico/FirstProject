@@ -37,7 +37,8 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
 
     @Override
     public void updateCandidateXTechnology(Long id, CandidateXTechnologyDto candidateXTechnologySendDto) {
-        CandidateXTechnology result = candidateXTechnologyRepository.findById(id).orElseThrow(() -> new CandidateXTechnologyNotFoundException("Objeto no encontrado "));
+        CandidateXTechnology result = candidateXTechnologyRepository.findById(id).orElseThrow(() ->
+                new CandidateXTechnologyNotFoundException("Objeto no encontrado "));
         try {
             if (result != null) {
                 result = CandidateXTechnology.builder()
@@ -90,7 +91,7 @@ public class CandidateXTechnologyServiceImp implements CandidateXTechnologyServi
             log.debug("Se listaran las experiencias de los candidatos");
             return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
         } catch (CandidateXTechnologyNotFoundException c) {
-            log.error( c.getMessage());
+            log.error(c.getMessage());
 
         }
         return candidateXTechnologyRepository.listCandidatesXTechnology(technology);
