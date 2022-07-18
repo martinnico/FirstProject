@@ -1,13 +1,11 @@
 package com.demo.firstproject.Controller;
 
 
-import com.demo.firstproject.repository.CandidateXTechnologyRepository;
 import com.demo.firstproject.services.CandidateXTechnologyService;
 import com.demo.firstproject.services.impl.CandidateXTechnologyServiceImp;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,8 +24,8 @@ class CandidateXTechnologyControllerTest extends AbstractMVCTest {
     @MockBean
     CandidateXTechnologyService candidateXTechnologyServiceint;
 
-    @InjectMocks
-    CandidateXTechnologyRepository candidateXTechnologyRepository;
+    /*@InjectMocks
+     CandidateXTechnologyRepository candidateXTechnologyRepository;*/
     @MockBean
     CandidateXTechnologyServiceImp candidateXTechnologyService;
 
@@ -42,7 +40,8 @@ class CandidateXTechnologyControllerTest extends AbstractMVCTest {
     @Test
     void createCandidateXTechnologyTest() throws Exception {
         candidateXTechnologyService.createCandidateXTechnology(createCandidateXTechnologyDtoSend());
-        verify(candidateXTechnologyService, times(1)).createCandidateXTechnology(createCandidateXTechnologyDtoSend());
+        verify(candidateXTechnologyService, times(1))
+                .createCandidateXTechnology(createCandidateXTechnologyDtoSend());
         String newCandidateXTechnology = new Gson().toJson(createCandidateXTEchnologyModel());
         mockMvc.perform(MockMvcRequestBuilders.post("/candidateXTechnology")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -53,7 +52,8 @@ class CandidateXTechnologyControllerTest extends AbstractMVCTest {
     @Test
     void updateCandidateXTechnologyTest() throws Exception {
         candidateXTechnologyService.updateCandidateXTechnology(1L, createCandidateXTechnologyDtoSend());
-        verify(candidateXTechnologyService, times(1)).updateCandidateXTechnology(1L, createCandidateXTechnologyDtoSend());
+        verify(candidateXTechnologyService, times(1))
+                .updateCandidateXTechnology(1L, createCandidateXTechnologyDtoSend());
         String newCandidateXTechnology = new Gson().toJson(createCandidateDto());
         mockMvc.perform(MockMvcRequestBuilders.put("/candidateXTechnology/1")
                         .contentType(MediaType.APPLICATION_JSON)
